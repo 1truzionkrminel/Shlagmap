@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ShlagMap</title>
+
+
+    <!-- LEAFLET -->
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         LOGIN
+    ====================================================== -->
+
+    <div id="loginOverlay">
+
+        <div id="loginBox">
+
+            <img src="logo.png"
+                 id="loginLogo"
+                 alt="ShlagMap">
+
+            <h2>ShlagMap</h2>
+
+            <input type="password"
+                   id="accessCode"
+                   placeholder="Code d'accès">
+
+            <button id="loginBtn">
+                Entrer
+            </button>
+
+            <p id="loginError"></p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header>
+
+        <div class="headerLeft">
+
+            <img src="logo.png"
+                 class="logo"
+                 alt="Logo">
+
+            <h1>ShlagMap</h1>
+
+        </div>
+
+
+        <div id="headerFilters"></div>
+
+
+        <button id="mobileMenuBtn"
+                class="mobileMenuButton">
+            ☰
+        </button>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAP
+    ====================================================== -->
+
+    <div id="map"></div>
+
+
+
+    <!-- =====================================================
+         PANEL
+    ====================================================== -->
+
+    <aside id="controlPanel">
+
+        <button id="closePanel"
+                class="closePanel">
+            ×
+        </button>
+
+
+        <h2>ShlagMap</h2>
+
+
+        <!-- MODES -->
+
+        <div class="modeButtons">
+
+            <button id="pointModeBtn"
+                    class="modeButton active">
+                📍 Point
+            </button>
+
+
+            <button id="lineModeBtn"
+                    class="modeButton">
+                📏 Tracé
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             POINT
+        ================================================== -->
+
+        <section id="pointForm"
+                 class="formSection">
+
+            <h3>Ajouter un point</h3>
+
+
+            <input id="name"
+                   type="text"
+                   placeholder="Nom">
+
+
+            <textarea id="desc"
+                      placeholder="Description"
+                      rows="4"></textarea>
+
+
+            <select id="category"></select>
+
+
+            <button id="addBtn"
+                    class="primaryButton">
+                Ajouter le point
+            </button>
+
+
+            <p id="info"
+               class="info">
+                Clique sur la carte pour choisir
+                l'emplacement.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TRACE
+        ================================================== -->
+
+        <section id="lineForm"
+                 class="formSection hidden">
+
+            <h3>Créer un tracé</h3>
+
+
+            <input id="lineName"
+                   type="text"
+                   placeholder="Nom du tracé">
+
+
+            <textarea id="lineDesc"
+                      placeholder="Description"
+                      rows="3"></textarea>
+
+
+            <select id="lineCategory"></select>
+
+
+            <button id="startLineBtn"
+                    class="primaryButton">
+                Commencer le tracé
+            </button>
+
+
+            <button id="finishLineBtn"
+                    class="successButton hidden">
+                Terminer le tracé
+            </button>
+
+
+            <button id="cancelLineBtn"
+                    class="dangerButton hidden">
+                Annuler
+            </button>
+
+
+            <p id="lineInfo"
+               class="info">
+                Clique sur « Commencer le tracé ».
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CATEGORIES
+        ================================================== -->
+
+        <section class="categorySection">
+
+            <h3>Catégories</h3>
+
+            <button id="newCategoryBtn"
+                    class="secondaryButton">
+                + Gérer les catégories
+            </button>
+
+        </section>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MOBILE
+    ====================================================== -->
+
+    <button id="mobileAddBtn"
+            class="mobileAddButton">
+        +
+    </button>
+
+
+
+    <!-- =====================================================
+         MODAL CATEGORIES
+    ====================================================== -->
+
+    <div id="categoryModal"
+         class="modal">
+
+        <div class="modalContent">
+
+            <button id="closeCategoryModal"
+                    class="modalClose">
+                ×
+            </button>
+
+
+            <h2>Gestion des catégories</h2>
+
+
+
+            <!-- CREATION -->
+
+            <div class="categoryCreation">
+
+                <h3>Créer une catégorie</h3>
+
+
+                <input id="newCategoryName"
+                       type="text"
+                       placeholder="Nom de la catégorie">
+
+
+                <h4>Choisir une icône</h4>
+
+
+                <div id="iconLibrary"
+                     class="iconLibrary"></div>
+
+
+                <div class="selectedIconContainer">
+
+                    <span>
+                        Icône :
+                    </span>
+
+                    <div id="selectedIconPreview"></div>
+
+                </div>
+
+
+                <h4>
+                    Couleur des tracés
+                </h4>
+
+
+                <div class="colorPickerContainer">
+
+                    <input type="color"
+                           id="categoryColor"
+                           value="#ff3333">
+
+                    <span id="colorValue">
+                        #ff3333
+                    </span>
+
+                </div>
+
+
+                <p id="categoryError"
+                   class="categoryError"></p>
+
+
+                <button id="createCategoryBtn"
+                        class="primaryButton">
+                    Créer la catégorie
+                </button>
+
+            </div>
+
+
+
+            <!-- LISTE -->
+
+            <div class="categoryManagement">
+
+                <h3>
+                    Catégories existantes
+                </h3>
+
+
+                <div id="categoryManager"
+                     class="categoryManager"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SCRIPTS
+    ====================================================== -->
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

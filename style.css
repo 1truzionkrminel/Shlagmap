@@ -1,0 +1,848 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background: #111;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+
+.logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+
+.headerLeft h1 {
+    font-size: 24px;
+}
+
+
+
+/* =========================================================
+   FILTRES
+========================================================= */
+
+#headerFilters {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    max-width: calc(100% - 250px);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+
+    #headerFilters::-webkit-scrollbar {
+        display: none;
+    }
+
+
+.filterButton {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: #222;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+
+    .filterButton img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+    }
+
+
+    .filterButton:hover {
+        background: #333;
+        transform: scale(1.08);
+    }
+
+
+    .filterButton.active {
+        border-color: white;
+        background: #444;
+    }
+
+
+
+/* =========================================================
+   CARTE
+========================================================= */
+
+#map {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    z-index: 1;
+}
+
+
+
+/* =========================================================
+   PANNEAU
+========================================================= */
+
+#controlPanel {
+    position: fixed;
+    top: 90px;
+    left: 20px;
+    width: 280px;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    z-index: 900;
+    padding: 20px;
+    background: rgba(10, 10, 10, 0.96);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+
+    #controlPanel h2 {
+        margin-bottom: 15px;
+    }
+
+
+    #controlPanel h3 {
+        margin-bottom: 10px;
+    }
+
+
+
+/* =========================================================
+   FERMETURE
+========================================================= */
+
+.closePanel {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+
+
+/* =========================================================
+   MODES
+========================================================= */
+
+.modeButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+
+.modeButton {
+    padding: 9px;
+    border: none;
+    border-radius: 6px;
+    background: #292929;
+    color: white;
+    cursor: pointer;
+}
+
+
+    .modeButton.active {
+        background: white;
+        color: black;
+    }
+
+
+
+/* =========================================================
+   FORMULAIRES
+========================================================= */
+
+.formSection {
+    display: block;
+}
+
+
+    .formSection.hidden {
+        display: none;
+    }
+
+
+    .formSection input,
+    .formSection textarea,
+    .formSection select,
+    .categoryCreation input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 9px;
+        border: 1px solid #444;
+        border-radius: 6px;
+        background: #1c1c1c;
+        color: white;
+        font-family: inherit;
+    }
+
+
+    .formSection textarea {
+        resize: vertical;
+    }
+
+
+        .formSection input:focus,
+        .formSection textarea:focus,
+        .formSection select:focus,
+        .categoryCreation input:focus {
+            outline: none;
+            border-color: white;
+        }
+
+
+
+/* =========================================================
+   BOUTONS
+========================================================= */
+
+button {
+    font-family: inherit;
+}
+
+
+.primaryButton,
+.successButton,
+.dangerButton,
+.secondaryButton {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+
+.primaryButton {
+    background: white;
+    color: black;
+}
+
+
+    .primaryButton:hover {
+        background: #ddd;
+    }
+
+
+.successButton {
+    background: #1f8f4c;
+    color: white;
+}
+
+
+    .successButton:hover {
+        background: #27aa5d;
+    }
+
+
+.dangerButton {
+    margin-top: 6px;
+    background: #b92c2c;
+    color: white;
+}
+
+
+    .dangerButton:hover {
+        background: #d83a3a;
+    }
+
+
+.secondaryButton {
+    background: #292929;
+    color: white;
+}
+
+
+    .secondaryButton:hover {
+        background: #3a3a3a;
+    }
+
+
+
+/* =========================================================
+   INFOS
+========================================================= */
+
+.info {
+    margin-top: 10px;
+    color: #aaa;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
+.categorySection {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+}
+
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+
+    .modal.show {
+        display: flex;
+    }
+
+
+.modalContent {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 25px;
+    border-radius: 12px;
+    background: #151515;
+    color: white;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+
+.modalClose {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+
+
+/* =========================================================
+   TABLEAU ICONES
+========================================================= */
+
+.iconLibrary {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    max-height: 230px;
+    overflow-y: auto;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background: #0d0d0d;
+}
+
+
+.iconChoice {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border: 2px solid transparent;
+    border-radius: 7px;
+    background: #222;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+
+    .iconChoice img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+    }
+
+
+    .iconChoice:hover {
+        background: #333;
+        transform: scale(1.05);
+    }
+
+
+    .iconChoice.selected {
+        border-color: white;
+        background: #444;
+    }
+
+
+
+/* =========================================================
+   APERCU ICON
+========================================================= */
+
+.selectedIconContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+
+#selectedIconPreview {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    border-radius: 8px;
+}
+
+
+    #selectedIconPreview img {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+    }
+
+
+
+/* =========================================================
+   COULEUR
+========================================================= */
+
+.colorPickerContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+
+#categoryColor {
+    width: 55px !important;
+    height: 40px;
+    padding: 2px !important;
+    margin: 0 !important;
+    border: 1px solid #444;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+#colorValue {
+    font-family: monospace;
+    color: #aaa;
+}
+
+
+
+/* =========================================================
+   ERREUR
+========================================================= */
+
+.categoryError {
+    min-height: 18px;
+    margin-bottom: 8px;
+    color: #ff6666;
+    font-size: 13px;
+}
+
+
+
+/* =========================================================
+   GESTION CATEGORIES
+========================================================= */
+
+.categoryManagement {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+
+.categoryManager {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.categoryRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px;
+    border-radius: 6px;
+    background: #222;
+}
+
+
+.categoryManagerIcon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+
+    .categoryManagerIcon img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+    }
+
+
+.categoryRow span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.categoryColorPreview {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+
+.deleteCategoryBtn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    background: #842626;
+    color: white;
+    cursor: pointer;
+}
+
+
+    .deleteCategoryBtn:hover {
+        background: #b83232;
+    }
+
+
+
+/* =========================================================
+   POPUP
+========================================================= */
+
+.popup h3 {
+    margin-bottom: 6px;
+}
+
+
+.popup p {
+    margin-bottom: 6px;
+}
+
+
+.deletePopup {
+    padding: 7px 12px;
+    border: none;
+    border-radius: 5px;
+    background: #c62828;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+#loginOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+}
+
+
+#loginBox {
+    width: 300px;
+    padding: 30px;
+    text-align: center;
+    border-radius: 12px;
+    background: white;
+    color: black;
+}
+
+
+#loginLogo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+
+#loginBox h2 {
+    margin-bottom: 20px;
+}
+
+
+#accessCode {
+    width: 100%;
+    padding: 11px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+}
+
+
+#loginBtn {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 6px;
+    background: #111;
+    color: white;
+    cursor: pointer;
+}
+
+
+#loginError {
+    min-height: 18px;
+    margin-top: 10px;
+    color: #d00000;
+}
+
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobileMenuButton {
+    display: none;
+    width: 38px;
+    height: 38px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 7px;
+    background: #292929;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.mobileAddButton {
+    display: none;
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 1000;
+    width: 55px;
+    height: 55px;
+    border: none;
+    border-radius: 50%;
+    background: #111;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    header {
+        height: 60px;
+        padding: 0 10px;
+    }
+
+
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .headerLeft h1 {
+        font-size: 19px;
+    }
+
+
+    #map {
+        top: 60px;
+        height: calc(100vh - 60px);
+    }
+
+
+    #headerFilters {
+        max-width: calc(100% - 130px);
+        gap: 5px;
+    }
+
+
+    .filterButton {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+    }
+
+
+        .filterButton img {
+            width: 24px;
+            height: 24px;
+        }
+
+
+    .mobileMenuButton {
+        display: block;
+    }
+
+
+    #controlPanel {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        border-radius: 0;
+        padding: 70px 20px 30px;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+    }
+
+
+        #controlPanel.mobileOpen {
+            transform: translateX(0);
+        }
+
+
+    .closePanel {
+        display: block;
+    }
+
+
+    .mobileAddButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .modalContent {
+        max-height: 95vh;
+        padding: 20px;
+    }
+
+
+    .iconLibrary {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .headerLeft h1 {
+        display: none;
+    }
+
+
+    #headerFilters {
+        max-width: calc(100% - 80px);
+    }
+
+
+    .iconLibrary {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
